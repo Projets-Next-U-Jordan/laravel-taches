@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Task;
 use Exception;
 use Illuminate\Http\Request;
@@ -13,7 +14,8 @@ class TaskController extends Controller
         $startDate = $request->startDate ?? now()->startOfMonth();
         $endDate = $request->endDate ?? now()->endOfMonth();
         $tasks = Task::whereBetween('due_date', [$startDate, $endDate])->get();
-        return view('task.index', compact('tasks','startDate','endDate'));
+        $categories = Category::all();
+        return view('task.index', compact('tasks','startDate','endDate', 'categories'));
     }
 
     public function fetch(Request $request) {
@@ -23,11 +25,14 @@ class TaskController extends Controller
 
         $events = $tasks->map(function($task) {
             return [
-                'title' => $task->name,
+                'id' => $task->id,
+                'name' => $task->name,
                 'start' => $task->due_date,
                 // 'url' => route('task.show', $task->id)
+                'category_id' => $task->category->id, // 'category' is a custom property, not a native one
                 'category' => $task->category->name, // 'category' is a custom property, not a native one
-                'color' => $task->category->color
+                'color' => $task->category->color,
+                'content' => $task->content ?? '',
             ];
         });
 
@@ -55,30 +60,33 @@ class TaskController extends Controller
     }
 
     public function ajax(Request $request) {
-        switch ($request->type) {
-            case 'create':
+        switch ($request->getMethod()) {
+            case 'POST':
                 $task = new Task();
                 $task->name = $request->name;
                 $task->due_date = $request->due_date;
                 $task->category_id = $request->category_id;
+                $task->content = $request->content;
                 $task->save();
                 return response()->json([
                     'status' => 'success',
                     'message' => 'Task created successfully',
                     'data' => $task
                 ]);
-            case 'update':
+            case 'PUT':
+            case 'PATCH':
                 $task = Task::find($request->id);
                 $task->name = $request->name;
                 $task->due_date = $request->due_date;
                 $task->category_id = $request->category_id;
+                $task->content = $request->content;
                 $task->save();
                 return response()->json([
                     'status' => 'success',
                     'message' => 'Task updated successfully',
                     'data' => $task
                 ]);
-            case 'delete':
+            case "DELETE":
                 $task = Task::find($request->id);
                 $task->delete();
                 return response()->json([
@@ -87,10 +95,7 @@ class TaskController extends Controller
                     'data' => $task
                 ]);
             default:
-                return response()->json([
-                    'status' => 'error',
-                    'message' => 'Invalid request type'
-                ]);
+                return response()->json(['status' => 'error', 'message' => 'Invalid request type' ]);
         }
     }
 }

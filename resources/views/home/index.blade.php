@@ -8,7 +8,10 @@
         <h2>Tâches en retard</h2>
         <ul>
             @foreach ($passedTasks as $task)
-                <li>{{$task->name}}</li>
+                <li>
+                    {{$task->name}} - 
+                    {{ \Carbon\Carbon::now()->diffForHumans($task->due_date, true) }} en retard
+                </li>
             @endforeach
         </ul>
     @endif

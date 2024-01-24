@@ -17,6 +17,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name("home.index");
 Route::get('/tasks', [TaskController::class, 'index'])->name("task.index");
+Route::post('/tasks', [TaskController::class, 'ajax']);
+Route::put('/tasks', [TaskController::class, 'ajax']);
+Route::delete('/tasks', [TaskController::class, 'ajax']);
 
 Route::get('/tasks/json', [TaskController::class, 'fetch'])->name("task.fetch");
 Route::get('/tasks/new', [TaskController::class, 'fetch'])->name("task.new");
