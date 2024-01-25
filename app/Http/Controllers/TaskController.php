@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TaskRequest;
 use App\Models\Category;
 use App\Models\Task;
 use Exception;
@@ -16,6 +17,42 @@ class TaskController extends Controller
         $tasks = Task::whereBetween('due_date', [$startDate, $endDate])->get();
         $categories = Category::all();
         return view('task.index', compact('tasks','startDate','endDate', 'categories'));
+    }
+
+    public function create() {
+        $categories = Category::all();
+        $task = new Task();
+        return view('task.create', compact('categories','task'));
+    }
+
+    public function show(Task $task) {
+        return view('task.show', compact('task'));
+    }
+
+    public function edit(Task $task) {
+        $categories = Category::all();
+        return view('task.edit', compact('task', 'categories'));
+    }
+
+    public function store(TaskRequest $request, Task $task) {
+        $answer = $this->ajax($request);
+        if ($answer->getStatusCode() !== 200) {
+            throw new Exception('Error creating task');
+        }
+        return redirect()->route('task.show', $task->id);
+    }
+
+    public function update(TaskRequest $request, Task $task) {
+        $answer = $this->ajax($request);
+        if ($answer->getStatusCode() !== 200) {
+            throw new Exception('Error updating task');
+        }
+        return redirect()->route('task.show', $task->id);
+    }
+
+    public function destroy(Task $task) {
+        $task->delete();
+        return redirect()->route('task.index');
     }
 
     public function fetch(Request $request) {
@@ -33,6 +70,7 @@ class TaskController extends Controller
                 'category' => $task->category->name, // 'category' is a custom property, not a native one
                 'color' => $task->category->color,
                 'content' => $task->content ?? '',
+                'completed' => $task->completed ?? false,
             ];
         });
 
@@ -67,6 +105,7 @@ class TaskController extends Controller
                 $task->due_date = $request->due_date;
                 $task->category_id = $request->category_id;
                 $task->content = $request->content;
+                $task->completed = $request->completed !== null;
                 $task->save();
                 return response()->json([
                     'status' => 'success',
@@ -80,6 +119,7 @@ class TaskController extends Controller
                 $task->due_date = $request->due_date;
                 $task->category_id = $request->category_id;
                 $task->content = $request->content;
+                $task->completed = $request->completed !== null;
                 $task->save();
                 return response()->json([
                     'status' => 'success',

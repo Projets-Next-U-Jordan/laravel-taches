@@ -13,6 +13,8 @@ class Task extends Model
         'name',
         'due_date',
         'category_id',
+        'content',
+        'completed'
     ];
 
     public function category() {

@@ -1,4 +1,4 @@
-<div class="modal fade" id="viewTask" tabindex="-1" role="dialog" aria-labelledby="viewTaskLabel" aria-hidden="true">
+<div class="modal modal-lg fade" id="viewTask" tabindex="-1" role="dialog" aria-labelledby="viewTaskLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,7 +8,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p><strong>Start:</strong> <span id="viewStart"></span></p>
+                <p><strong>Complété:</strong> <span id="viewCompleted"></span></p>
+                <p><strong>Pour:</strong> <span id="viewStart"></span></p>
                 <p><strong>Category:</strong> <span id="viewCategory"></span></p>
                 <p><strong>Content</strong><br><textarea readonly style="width:100%" id="viewContent"></textarea></p>
             </div>

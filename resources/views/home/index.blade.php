@@ -3,12 +3,12 @@
 @section('title', 'Accueil')
 
 @section('content')
-    <h1>Aujourd'hui {{ date('d/m/Y H:i:s') }}</h1>
+    <h1>Aujourd'hui {{ date('d/m/Y') }}</h1>
     @if (count($passedTasks) > 0)
         <h2>Tâches en retard</h2>
         <ul>
             @foreach ($passedTasks as $task)
-                <li>
+                <li class="h4">
                     {{$task->name}} - 
                     {{ \Carbon\Carbon::now()->diffForHumans($task->due_date, true) }} en retard
                 </li>

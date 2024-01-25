@@ -1,4 +1,4 @@
-<div class="modal fade" id="task" tabindex="-1" role="dialog" aria-labelledby="taskLabel" aria-hidden="true">
+<div class="modal modal-lg fade" id="task" tabindex="-1" role="dialog" aria-labelledby="taskLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -12,10 +12,16 @@
                 @csrf
                 <input type="hidden" name="_method" id="method">
                 <input type="hidden" class="form-control" name="id" id="id">                
-                <div class="form-group">
-                    <label for="name">Titre</label>
-                    <input type="text" class="form-control" name="name" id="name">
+                <div class="form-group d-flex align-items-center gap-3">
+                  <label for="name" class="mr-3">Titre</label>
+                  <input type="text" class="form-control mr-3" name="name" id="name">
+                  <div class="form-check" style="white-space: nowrap;">
+                    <input class="form-check-input" name="completed" type="checkbox" id="checkbox">
+                    <label class="form-check-label" for="checkbox">
+                        Fini ?
+                    </label>
                 </div>
+              </div>
             
                 <div class="form-group">
                     <label for="start">Quand ?</label>

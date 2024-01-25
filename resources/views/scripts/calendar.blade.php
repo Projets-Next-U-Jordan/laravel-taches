@@ -48,6 +48,8 @@
 
         $('#taskForm #content').val(content);
 
+        $('#taskForm #checkbox').prop('checked', currentEvent.extendedProps.completed);
+
 
         $('#task').modal('show');
     }
@@ -57,11 +59,13 @@
         let start = currentEvent.start;
         let content = currentEvent.extendedProps.content;
         let category = currentEvent.extendedProps.category;
+        let completed = currentEvent.extendedProps.completed;
 
         $('#viewTask #viewTaskLabel').text(name);
         $('#viewTask #viewStart').text(start.toISOString());
         $('#viewTask #viewContent').text(content);
         $('#viewTask #viewCategory').text(category);
+        $('#viewTask #viewCompleted').text(completed ? 'Oui' : 'Non');
         $('#viewTask #deleteId').val(id);
 
         $('#viewTask').modal('show');
@@ -92,7 +96,7 @@
             },
             customButtons: {
                 myCustomButton: {
-                    text: 'Add Event',
+                    text: '+ Nouveau',
                     click: function() {
                         window.location.href = '{{ route('task.new') }}'; // Replace with the actual path
                     }
@@ -104,12 +108,12 @@
                 right: 'myCustomButton prev,today,next'
             },
             eventContent: function(arg) {
-                console.log(arg)
                 let arrayOfDomNodes = [];
 
                 // Create main frame div
                 let mainFrameEl = document.createElement('div');
                 mainFrameEl.className = 'fc-event-main-frame';
+
 
                 // Create time div
                 let timeEl = document.createElement('div');
@@ -127,6 +131,17 @@
 
                     timeEl.appendChild(categorySpan);
 
+                }
+
+                if (arg.event.extendedProps.completed) {
+                    timeEl.innerHTML += ' · ';
+                    // Create completed span
+                    let completedSpan = document.createElement('span');
+                    completedSpan.className = 'calendar-event-completed';
+                    completedSpan.title = 'Tâche complétée';
+                    completedSpan.innerHTML = '✓';
+
+                    timeEl.appendChild(completedSpan);
                 }
                 // Create title container div
                 let titleContainerEl = document.createElement('div');
