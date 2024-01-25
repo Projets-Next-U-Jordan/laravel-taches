@@ -1,5 +1,5 @@
 <div class="modal modal-lg fade" id="task" tabindex="-1" role="dialog" aria-labelledby="taskLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="taskLabel">Tâche</h5>
@@ -16,7 +16,7 @@
                   <label for="name" class="mr-3">Titre</label>
                   <input type="text" class="form-control mr-3" name="name" id="name">
                   <div class="form-check" style="white-space: nowrap;">
-                    <input class="form-check-input" name="completed" type="checkbox" id="checkbox">
+                    <input class="form-check-input" name="completed" value="1" type="checkbox" id="checkbox">
                     <label class="form-check-label" for="checkbox">
                         Fini ?
                     </label>

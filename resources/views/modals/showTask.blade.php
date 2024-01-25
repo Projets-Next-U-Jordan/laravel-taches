@@ -1,5 +1,5 @@
 <div class="modal modal-lg fade" id="viewTask" tabindex="-1" role="dialog" aria-labelledby="viewTaskLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="viewTaskLabel">View Task</h5>
@@ -14,6 +14,7 @@
                 <p><strong>Content</strong><br><textarea readonly style="width:100%" id="viewContent"></textarea></p>
             </div>
             <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="showButton">Afficher</button>
                 <button type="button" class="btn btn-danger" id="deleteButton">Delete</button>
                 <button type="button" class="btn btn-primary" id="editButton">Edit</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

@@ -23,7 +23,7 @@ class TaskRequest extends FormRequest
     {
         return [
             'name' => 'required|string|min:3|max:255',
-            'due_date' => 'required|date_format:Y-m-d\TH:i|after:now',
+            'due_date' => 'nullable|date_format:Y-m-d\TH:i|after:now',
             'category_id' => 'required|exists:categories,id',
             'content' => 'nullable|string',
             'completed' => 'nullable|boolean'

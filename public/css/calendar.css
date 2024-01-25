@@ -1,0 +1,56 @@
+.calendar-event-category {
+    text-overflow: ellipsis;
+}
+
+
+
+.fc-toolbar {
+    flex-direction: column;
+}
+
+@media (min-width: 768px) {
+    .fc .fc-toolbar {
+        flex-direction: row;
+    }
+}
+
+.fc-highlight {
+    background-color: #FFC107 !important; /* Amber */
+}
+
+.fc-daygrid-day {
+    background-color: #F5F5F5 !important; /* Light Grey */
+}
+
+.fc-day-today {
+    background-color: #978888 !important; /* Green */
+    color: white !important;
+    border: none;
+}
+
+.fc-col-header-cell.fc-day {
+    background-color: #3F51B5 !important; /* Indigo */
+    text-transform: capitalize;
+}
+
+
+
+.fc-day-disabled {
+    background-color: #F44336 !important; /* Red */
+    color: white !important;
+}
+
+.fc thead[role="presentation"] a {
+    color: white !important; /* Indigo */
+    text-decoration: none;
+}
+
+.fc-daygrid-day-number {
+    color: black !important;
+    text-decoration: none;
+}
+
+.fc-day-today .fc-daygrid-day-number {
+    color: white !important;
+    text-decoration: underline;
+}

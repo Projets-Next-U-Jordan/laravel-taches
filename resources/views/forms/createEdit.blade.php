@@ -19,7 +19,8 @@
 
     <div class="form-group">
         <label for="start">Quand ?</label>
-        <input type="datetime-local" class="form-control" name="due_date" id="start" min="{{ date('Y-m-d') }}T00:00" value="{{ old('due_date', $task ? $task->due_date : '') }}">
+        {{-- Disable if $task has duedate --}}
+        <input type="datetime-local" {{ $task->due_date ? 'disabled' : '' }} class="form-control"  name="due_date" id="start" min="{{ date('Y-m-d') }}T00:00" value="{{ old('due_date', $task->due_date ? $task->due_date :  now()->format('Y-m-d\TH:i')) }}">
     </div>
 
     <div class="form-group">
