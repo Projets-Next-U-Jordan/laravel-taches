@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}"
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
@@ -19,11 +19,11 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{{ route('home.index') }}">Tâches</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="w-100" id="navbarNav">
+            <div class="d-flex" id="navbarNav">
+                <a class="navbar-brand" href="{{ route('home.index') }}">Tâches</a>
                 <ul class="navbar-nav">
                     @if(auth()->check())
                     <li class="nav-item">
@@ -44,6 +44,9 @@
             <div class="d-flex" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     @if(auth()->check())
+                        <li class="nav-item">
+                            <a class="nav-link">{{ auth()->user()->name }}</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('logout') }}"
                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

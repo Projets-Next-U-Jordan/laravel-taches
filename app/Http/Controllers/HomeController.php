@@ -18,6 +18,7 @@ class HomeController extends Controller
             ->where('completed', false)
             ->orderBy('due_date', 'asc')
             ->limit(20)
+            ->where('user_id', auth()->id())
             ->get();        
         return view('home.index',compact('tasks', 'passedTasks', 'users'));
     }

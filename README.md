@@ -17,14 +17,16 @@ cd laravel-taches
 composer install
 ```
 
-3. Configurer l'environnement
+4. Copier .env.example en .env
 
-5. Lancer la migration de la base de donnée
+5. Le configurer si nécéssaire
+
+6. Lancer la migration de la base de donnée
 ```bash
 php artisan migrate
 ```
 
-6. Lancer le serveur de développement:
+7. Lancer le serveur de développement:
 ```bash
 php artisan serve
 ```
