@@ -75,7 +75,7 @@
     }
 
     const options = {
-        firstDay: 1,
+        firstDay: new Date().getDay()-2,
         initialView: $(window).width() < 765 ? "timeGridToday" : 'timeGridWeek',
         locale: 'fr',
         height: 'auto',
@@ -200,7 +200,7 @@
             if (currentEvent === undefined) return;
 
             let id = currentEvent.id;
-            let url = '{{ route('ajax.task.delete') }}';
+            let url = '{{ route('ajax.tasks.delete') }}';
             let method = 'DELETE';
             $.ajax({
                 url: url,
@@ -225,7 +225,7 @@
             e.preventDefault();
             let form = $(this);
             let method = $('#method').val();
-            let url = method === 'POST' ? '{{ route('ajax.task.create') }}' : '{{ route('ajax.task.update') }}';
+            let url = method === 'POST' ? '{{ route('ajax.tasks.create') }}' : '{{ route('ajax.tasks.update') }}';
             let data = form.serialize();
             $.ajax({
                 url: url,

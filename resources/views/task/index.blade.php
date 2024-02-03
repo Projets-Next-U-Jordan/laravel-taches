@@ -2,26 +2,17 @@
 
 @section('title',"Tâches")
 
-@section('additionalHeader')
-    <link rel="stylesheet" href="css/calendar.css">
-    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
-    <script src="{{asset('js/fullcalendar-locales-all.min.js')}}"></script>
-    @include('scripts.calendar')
-@endsection
-
 @section('content')
-    <div id='calendar'></div>
-    @include('modals.createEditTask')
-    @include('modals.showTask')
 
-<div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="toast-header">
-        <strong class="mr-auto">Error</strong>
-        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="toast-body">
-    </div>
+<div class="d-flex gap-2 align-items-center">
+    <h1>Tâches</h1>
+    <a class="btn btn-primary" href="{{ route('task.new') }}">+</a>
 </div>
+@foreach ($tasks as $task)
+<span class="badge" style="background-color:{{ $task->category->color ?? 'grey' }}">
+    <a class="h2 no-link-style" href="{{ route('task.show',$task) }}">{{ $task->name }}</a>
+</span>
+@endforeach
+{{ $tasks->links('pagination::bootstrap-5') }}
+
 @endsection

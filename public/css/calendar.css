@@ -54,3 +54,7 @@
     color: white !important;
     text-decoration: underline;
 }
+
+.fc-v-event {
+    background-color: grey;
+}

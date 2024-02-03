@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}"
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,6 +14,7 @@
     @yield('additionalHeader')
 
     <title>@yield('title')</title>
+    @livewireStyles
 </head>
 <body>
     <nav class="navbar navbar-expand-lg bg-light">
@@ -21,24 +23,59 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="w-100" id="navbarNav">
                 <ul class="navbar-nav">
+                    @if(auth()->check())
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs("home.index") ? 'active' : '' }}" href="{{ route('home.index') }}">Accueil</a>
-                    </li>                
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs("task.index") ? 'active' : '' }}" href="{{ route('task.index') }}">Calendrier</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs("task.index") ? 'active' : '' }}" href="{{ route('task.index') }}">Tâches</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs("category.index") ? 'active' : '' }}" href="{{ route('category.index') }}">Catégories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs("task.calendar") ? 'active' : '' }}" href="{{ route('task.calendar') }}">Calendrier</a>
+                    </li>
+                    @endif
+                </ul>
+            </div>
+            <div class="d-flex" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    @if(auth()->check())
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('logout') }}"
+                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs("login") ? 'active' : '' }}" href="{{ route('login') }}">
+                                {{__('Login')}}
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs("register") ? 'active' : '' }}" href="{{ route('register') }}">
+                                {{__('Signup')}}
+                            </a>
+                        </li>
+                    @endif
                 </ul>
             </div>
         </div>
     </nav>
 
-    <main class="p-4">
+    <main class="p-4 pt-0">
         @yield('content')
     </main>
 
     <!-- JS -->
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    @livewireScripts
 </body>
 </html>

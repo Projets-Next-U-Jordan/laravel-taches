@@ -18,7 +18,7 @@
 
     @if (count($tasks) > 0)
         <h2>
-            Tâches du jour
+            Prochaines tâches
         </h2>
         <ul>
             @foreach ($tasks as $task)
