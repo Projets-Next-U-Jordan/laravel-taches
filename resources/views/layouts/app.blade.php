@@ -14,7 +14,6 @@
     @yield('additionalHeader')
 
     <title>@yield('title')</title>
-    @livewireStyles
 </head>
 <body>
     <nav class="navbar navbar-expand-lg bg-light">
@@ -79,6 +78,5 @@
 
     <!-- JS -->
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    @livewireScripts
 </body>
 </html>
